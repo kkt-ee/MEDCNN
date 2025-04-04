@@ -1,5 +1,5 @@
 """ॐ
-    Version 0.0.1: 2D MEDCNN without attentions
+    Version 0.0.2: 2D MEDCNN without attentions
 
     MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
@@ -35,4 +35,4 @@
 
 
 
-__version__="0.0.1"
+__version__="0.0.2"
