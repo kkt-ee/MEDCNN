@@ -53,7 +53,7 @@ pip install .
 
 * * *
 
-## Verify installation and
+## Verify installation 
 
 ```python
 import MEDCNN
