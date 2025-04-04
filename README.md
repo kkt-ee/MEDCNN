@@ -93,7 +93,6 @@ MEDCNN.__version__
    CONFIGKEY= 'minimal2'
    model, segconfig = Gφψ(config=configs[CONFIGKEY], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
-   model.summary()
    ```
 
    - Example: Compile a control Unet2D
@@ -101,7 +100,6 @@ MEDCNN.__version__
    CONFIGKEY = '45678',
    model, segconfig = Unet2D(config=uconfigs['45678'], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
-   model.summary()
    ```
 
    - Example: Train a model with X an Y of shape (7056, 256, 256, 1), (7056, 256, 256, 1)
