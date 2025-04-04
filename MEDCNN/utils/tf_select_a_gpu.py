@@ -3,7 +3,7 @@ import tensorflow as tf
 def select_a_gpu(gpus:list, gpu_id:int, memory_limit=47):
     """Hard limit: 47 GB max gpu memory
 
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

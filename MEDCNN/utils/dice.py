@@ -14,7 +14,7 @@ import tensorflow.keras.backend as K
 def dice_coef(y_true, y_pred, smooth=0):
     """Dice coefficient 
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

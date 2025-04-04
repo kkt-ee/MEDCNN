@@ -14,7 +14,7 @@ from keras.utils import plot_model
 def compile_model(model, dataset, dice_coef):
     """Compile model 
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

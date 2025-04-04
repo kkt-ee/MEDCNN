@@ -5,7 +5,7 @@ import keras
 class BoundaryAwareDiceLoss(tf.keras.losses.Loss):
     """Boundary aware Dice Loss 
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

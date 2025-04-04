@@ -24,7 +24,7 @@ import time
 def train(model, train_iterator, test_iterator, val_iterator, dataset='IBSR', segconfig='nonResidual' , lossname='bce', CONFIGKEY='4567', epochs=40):
     """Train model
 
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

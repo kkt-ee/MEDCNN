@@ -19,7 +19,7 @@ def get_train_test_val_iterators(
     train_val_seed=42):
     """Prepare Train, Test and Validation data iterators
 
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify

@@ -6,7 +6,7 @@ import numpy as np
 def load_ibsr_XY(datapath):
     """Load IBSRv2 data
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ def load_ibsr_XY(datapath):
 def load_atlas_XY(datapath):
     """Load ATLAS2 data 
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
     
     This program is free software: you can redistribute it and/or modify
