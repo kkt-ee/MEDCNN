@@ -55,48 +55,50 @@ pip install .
 
 ## Verify installation
 
-### Compute $\text{DWT}$ $1\text{D}$ and $\text{IDWT}$ $1\text{D}$ of batched, multichannel $x$ of shape $(\text{batch, length, channels})$
+### Sample usage
 
-```python
-"""Import MEDCNN 2D Gφψ without attention"""
-from MEDCNN.models.G2DwithoutAttention import Gφψ, configs
+   - Import MEDCNN 2D Gφψ without attention
+   ```python
+   from MEDCNN.models.G2DwithoutAttention import Gφψ, configs
+   ```
 
+   - Import the control Unet2D model for reference
+   ```
+   from MEDCNN.models.ControlUnet2D import Unet2D, uconfigs
+   ```
 
-"""Import the control Unet2D model for reference"""
-from MEDCNN.models.ControlUnet2D import Unet2D, uconfigs
+   - Import utils to compile and train model
+   ```
+   from MEDCNN.utils.utils import elapsedtime, timestamp
+   from MEDCNN.utils.BoundaryAwareDiceLoss import BoundaryAwareDiceLoss
+   from MEDCNN.utils.Load2Ddata import load_ibsr_XY
+   from MEDCNN.utils.TTViterators import get_train_test_val_iterators
+   from MEDCNN.utils.dice import dice_coef
+   from MEDCNN.utils.compile1 import compile_model
+   from MEDCNN.utils.Train1 import train
+   ```
 
+   - Example: Compile a MEDCNN
+   ```
+   CONFIGKEY= 'minimal2'
+   model, segconfig = Gφψ(config=configs[CONFIGKEY], compile=False), 'nonResidual'
+   model, lossname = compile_model(model, dataset, dice_coef)
+   ```
 
-"""Import utils to compile and train model"""
-from MEDCNN.utils.utils import elapsedtime, timestamp
-from MEDCNN.utils.BoundaryAwareDiceLoss import BoundaryAwareDiceLoss
-from MEDCNN.utils.Load2Ddata import load_ibsr_XY
-from MEDCNN.utils.TTViterators import get_train_test_val_iterators
-from MEDCNN.utils.dice import dice_coef
-from MEDCNN.utils.compile1 import compile_model
-from MEDCNN.utils.Train1 import train
+   - Example: Compile a control Unet2D
+   ```
+   CONFIGKEY = '45678',
+   model, segconfig = Unet2D(config=uconfigs['45678'], compile=False), 'nonResidual'
+   model, lossname = compile_model(model, dataset, dice_coef)
+   ```
 
-
-"""Example: Compile a MEDCNN"""
-CONFIGKEY= 'minimal2'
-model, segconfig = Gφψ(config=configs[CONFIGKEY], compile=False), 'nonResidual'
-model, lossname = compile_model(model, dataset, dice_coef)
-
-
-"""Example: Compile a control Unet2D"""
-CONFIGKEY = '45678',
-model, segconfig = Unet2D(config=uconfigs['45678'], compile=False), 'nonResidual'
-model, lossname = compile_model(model, dataset, dice_coef)
-
-
-"""Example: Train a model with X an Y of shape (7056, 256, 256, 1), (7056, 256, 256, 1)
+   - Example: Train a model with X an Y of shape (7056, 256, 256, 1), (7056, 256, 256, 1)
    Assuming X and Y is loaded by a dataloader
-"""
-train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y)
-epochs = 40
-train(model, train_iterator, test_iterator, val_iterator, dataset=dataset, segconfig=segconfig , lossname=lossname, CONFIGKEY=CONFIGKEY, epochs=epochs)
-
-
-```
+   ```
+   train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y)
+   epochs = 40
+   train(model, train_iterator, test_iterator, val_iterator, dataset=dataset, segconfig=segconfig , lossname=lossname, CONFIGKEY=CONFIGKEY, epochs=epochs)
+   ```
 
 
 
