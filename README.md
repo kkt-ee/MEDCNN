@@ -19,7 +19,7 @@
 
 ## Installation guide
 
-<br/><br/>
+<br/>
 
 **Install TFDWT from PyPI** (Option $1$)
 
@@ -28,7 +28,7 @@ pip install MEDCNN
 ```
 
   
-<br/><br/>
+<br/>
 
 **Install TFDWT from Github** (Option $2$)
 
