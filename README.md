@@ -60,6 +60,7 @@ import MEDCNN
 MEDCNN.__version__
 ```
 
+<br/><br/><br/>
 
 ## Sample usage
 
