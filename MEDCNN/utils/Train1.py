@@ -14,7 +14,7 @@ import sys
 [sys.path.insert(0,_) for _ in mylibpath]
 del mylibpath
 
-from utils import elapsedtime, timestamp
+from MEDCNN.utils.utils import elapsedtime, timestamp
 import shelve
 import pickle
 import matplotlib.pyplot as plt
