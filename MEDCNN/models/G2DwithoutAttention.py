@@ -38,9 +38,9 @@ import tensorflow as tf
 class Pooling(tf.keras.layers.Layer):
     """DWT Pooling Layer: keep Low freq band only
    
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
-
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -151,9 +151,9 @@ def Gφψ(
         1. DWT level 4 decompostion of input matrix
         2. Wavelet pooling
 
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
-
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or

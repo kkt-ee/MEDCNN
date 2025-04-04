@@ -1,6 +1,6 @@
-""" Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+""" MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
-
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -42,9 +42,9 @@ def Unet2D(
     compile=True):
     """UNet2D (control model) 
     
-    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    MEDCNN: Multiresolution Encoder-Decoder Convolutional Neural Network
     Copyright (C) 2025 Kishore Kumar Tarafdar
-
+    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
