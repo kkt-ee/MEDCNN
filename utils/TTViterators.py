@@ -17,6 +17,24 @@ def get_train_test_val_iterators(
     train_val_ratio=0.1, 
     train_test_seed=42, 
     train_val_seed=42):
+    """Prepare Train, Test and Validation data iterators
+
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=train_test_ratio, random_state=train_test_seed)
     print(X_train.shape==Y_train.shape, X_train.shape)

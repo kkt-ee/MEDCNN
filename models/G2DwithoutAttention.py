@@ -1,12 +1,22 @@
-"""date: 16 Jun 24
-Residual encoder-decoder multiresolution CNN with attention in decoder for Semantic segmentation
+""" Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    Copyright (C) 2025 Kishore Kumar Tarafdar
 
-Multiresolution analysis:
-1. DWT level 4 decompostion of input matrix
-2. Wavelet pooling
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-Author: Kishore
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
+
+
 # # include ../dirx 
 # mylibpath = [
 #     # '/home/kishor/src/FastDWTConvLayers',
@@ -17,107 +27,33 @@ Author: Kishore
 # [sys.path.insert(0,_) for _ in mylibpath]
 # del mylibpath
 
-# from DWTIDWT2Dtfv1 import DWT2D, IDWT2D
 from TFDWT.DWTIDWT2Dv1 import DWT2D, IDWT2D
-# from DWTselfAttention2D import DWTselfAttention
 from tensorflow.keras.layers import Concatenate
 
 import tensorflow as tf
-# import tensorflow_addons as tfa
-# from cbam import CBAM, SpatialAttention
 
 
-
-
-# # of trainable filter configs. for DWTUnet
-# configs = {
-#     'config2':(2,2,2,2,2,2),
-#     'config4':(4,4,4,4,4,4),
-#     'config8':(8,8,8,8,8,8),
-#     'config16':(16,16,16,16,16,16),
-#     'config32':(32,32,32,32,32,32),
-#     'config64':(64,64,64,64,64,64),
-#     'configG1':(16,1,1,1,1,1),
-#     'config42':(4,2,2,2,2,2),
-#     'config82':(8,2,2,2,2,2),
-#     'config83':(8,3,3,3,3,3),
-#     'config93':(9,3,3,3,3,3),
-#     'configG2':(16,2,2,2,2,2),
-#     'config322':(32,2,2,2,2,2),
-#     'config642':(64,2,2,2,2,2),
-#     'config84':(8,4,4,4,4,4),
-#     'config164':(16,4,4,4,4,4),
-#     'config324':(32,4,4,4,4,4),
-#     'config644':(64,4,4,4,4,4),
-#     'config1288':(128,8,8,8,8,8),
-#     'config168':(16,8,8,8,8,8),
-#     'config328':(32,8,8,8,8,8),
-#     'config648':(64,8,8,8,8,8),
-#     'config3216':(32,16,16,16,16,16),
-#     'config6416':(64,16,16,16,16,16),
-#     'config6432':(64,32,32,32,32,32),
-#     'config132':(1,2,4,8,16,32),
-#     'config264':(2,4,8,16,32,64),
-#     'config4128':(4,8,16,32,64,128),
-#     'config8256':(8,16,32,64,128,256),
-#     'config823456':(8,2,3,4,5,6),
-
-#     }
-
-configs = {
-    # 'minimal': (2, 2, 2, 2, 2),
-    'minimal2': (2, 4, 8, 16, 32),
-
-    # 'config242': (2, 2, 2, 2, 4),
-    # 'config282': (2, 2, 2, 4, 4),
-    # 'config242': (2, 2, 4, 4, 4),
-    # 'config282': (2, 4, 4, 4, 4),
-    # 'config282': (2, 4, 4, 4, 8),
-    # 'config282': (2, 4, 4, 8, 8),
-    # 'config2F2': (2, 4, 8, 8, 8),
-    # 'config282': (2, 4, 8, 16, 16),
-
-
-
-    # 'config242': (4, 4, 4, 4, 4),
-    # 'config282': (4, 4, 4, 4, 8),
-    # 'config282': (4, 4, 4, 8, 8),
-    # 'config282': (4, 4, 8, 8, 8),
-    # 'config242': (4, 8, 8, 8, 8),
-    # 'config282': (8, 8, 8, 8, 8),
-    # 'config282': (8, 8, 8, 8, 16),
-    # 'config2F2': (8, 8, 8, 16, 16),
-    # 'config2F2': (8, 8, 16, 16, 16),
-    # 'config2F2': (8, 8, 16, 16, 16),
-    # 'config2F2': (8, 16, 16, 16, 16),
-    # 'config2F2': (16, 16, 16, 16, 16),
-    # 'config2F2': (2, 4, 8, 16, 32),
-    # 'config2F2': (2, 4, 8, 16, 16),
-    # 'config2F2': (2, 4, 8, 16, 16),
-    
-    
-    # 'config4': (4, 4, 4, 4, 4),
-    # 'config484': (4, 8, 8, 8, 4),
-    # 'config4F4': (4, 16, 16, 16, 4),
-    # 'config8': (8, 8, 8, 8, 8),
-    # 'default': (8, 16, 16, 16, 8),
-    # 'default2': (8, 16, 32, 16, 8)
-}
-
-# from configs import configs
-
-## Pooling layer
-# import tensorflow as tf
-# import tensorflow_wavelets.Layers.DWT as DWT
-# from wavetf import WaveTFFactory
-#from Mish import Mish
-
+#%% Pooling layers
 # @keras.saving.register_keras_serializable()
 class Pooling(tf.keras.layers.Layer):
-    '''DWT Pooling Layer: keep Low freq band only
-          #separableConv2D
-          #Mish'''
+    """DWT Pooling Layer: keep Low freq band only
+   
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    Copyright (C) 2025 Kishore Kumar Tarafdar
 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
     def __init__(self, Ψ='haar', **kwargs):
         super(Pooling, self).__init__(**kwargs)
         self.supports_masking = True
@@ -127,20 +63,18 @@ class Pooling(tf.keras.layers.Layer):
     #     self.num_channels = input_shape[-1]
     #     super(Pooling, self).build(input_shape) 
 
-
     def call(self, inputs):
         """inputs -> wave0 -> wave1 -> wave2 -> wave0_cap(inverse)"""
         chans = inputs.shape[3]
         wave0 = inputs #L0
         # wave1 = WaveTFFactory.build(self.Ψ)(wave0) #L1
         wave1 = DWT2D(self.Ψ)(wave0)
-
         return wave1[:,:,:,:chans]
         
 
 
 
-
+#%%
 def conv2D(f, x, activation='relu'):
     """Double conv layer"""
     x = tf.keras.layers.Conv2D(f, (3, 3), kernel_initializer='he_normal', padding='same')(x)
@@ -172,26 +106,32 @@ def Gφψ(
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001),
     residual=False,
     compile=True):
+    """ Residual MEDCNN without attention for binary semantic segmentation
+   
+    Multiresolution features:
+        1. DWT level 4 decompostion of input matrix
+        2. Wavelet pooling
+
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
 
     activation, activation2, activation3 = 'relu', 'relu', tf.keras.activations.mish
     # tfa.activations.mish
 
-
-    # print(config)
-    # f,a,b,c,d,e = config
-    # e = 8
-    # wave = Ψ = 'haar'
-
-    # ## Selecting input shape as per input dataset
-    # if dataset=='NFBS':
-    #     input_shape = (256, 192, 1)
-    # elif dataset=='IBSR':
-    #     input_shape =(256, 128, 1)
-    # else:
-    #     print("!! Dataset incorrect. NFBS or IBSR only allowed")
-    #     return 'Incorrect dataset'
-    
-    # print('DATASET: ', dataset)
 
     # input_shape =(256, 256, 1)
     inputs = tf.keras.layers.Input(input_shape)
@@ -212,9 +152,7 @@ def Gφψ(
        / ((tf.reduce_max((x - tf.reduce_mean(x)) / tf.math.reduce_std(x))) - (tf.reduce_min((x - tf.reduce_mean(x)) / tf.math.reduce_std(x)))), 
         x
         ))(s)
-
-   
-    
+ 
     
     l = DWT2D(wave=Ψ)(s)
     l1 = l[:,:,:,:1]
@@ -234,9 +172,6 @@ def Gφψ(
     h4 = l[:,:,:,1:]
     #
     
-
-
-
     # f, a, b, c, d = 8, 16, 16, 16, 8
     # f, a, b, c, d = config
     a, b, c, d , e = config
@@ -272,19 +207,12 @@ def Gφψ(
     xl4_ = conv2D(d, xl4)
     xl4 = Pooling()(xl4_)
 
-    
-    
-
-
 
     xlat = xl4
     # e = f
     # floor------------
     xlat = conv2D(e, xlat)
     #-----------------    
-
-
-
 
 
     ## Decoder /Synthesis -----------------
@@ -329,55 +257,7 @@ def Gφψ(
     xl1u = xl1u_   
 
 
-
-
-
-
-
-    k = 3
-    # xl4u = tf.keras.layers.Conv2D(1, (k, k), activation=activation2, padding='same')(xl4u)
-    # xl3u = tf.keras.layers.Conv2D(1, (k, k), activation=activation2, padding='same')(xl3u)
-    # xl2u = tf.keras.layers.Conv2D(1, (k, k), activation=activation2, padding='same')(xl2u)
-    # xl1u = tf.keras.layers.Conv2D(1, (k, k), activation=activation2, padding='same')(xl1u)
-
-
-
-
-
-   
-    # xl4u = SpatialAttention()(xl4u)
-    # xl3u = SpatialAttention()(xl3u)
-    # xl2u = SpatialAttention()(xl2u)
-    # xl1u = SpatialAttention()(xl1u)
-
- 
-    # l4 = DWTselfAttention(wave='haar', level=4)(l4)
-    # l3 = DWTselfAttention(wave='haar', level=4)(l3)
-    # l2 = DWTselfAttention(wave='haar', level=4)(l2)
-    # l1 = DWTselfAttention(wave='haar', level=4)(l1)
-
-   
-    # xl4u = tf.keras.layers.Conv2D(1, (k, k), activation=activation3, padding='same')(Concatenate()([xl4u, l4]))
-    # xl3u = tf.keras.layers.Conv2D(1, (k, k), activation=activation3, padding='same')(Concatenate()([xl3u, l3]))
-    # xl2u = tf.keras.layers.Conv2D(1, (k, k), activation=activation3, padding='same')(Concatenate()([xl2u, l2]))
-    # xl1u = tf.keras.layers.Conv2D(1, (k, k), activation=activation3, padding='same')(Concatenate()([xl1u, l1]))
-
-    
-    # xl4u = DWTselfAttention(wave='haar', level=4)(xl4u)
-    # xl3u = DWTselfAttention(wave='haar', level=4)(xl3u)
-    # xl2u = DWTselfAttention(wave='haar', level=4)(xl2u)
-    # xl1u = DWTselfAttention(wave='haar', level=4)(xl1u)
-
-
-
-
-    ## OPTIONAL
-    # h4 = DWTselfAttention(wave='haar', level=4)(h4)
-    # h3 = DWTselfAttention(wave='haar', level=4)(h3)
-    # h2 = DWTselfAttention(wave='haar', level=4)(h2)
-    # h1 = DWTselfAttention(wave='haar', level=4)(h1)
-
-   
+    k = 3  
    
     iw4 = IDWT2D(wave=Ψ)(Concatenate()([xl4u,h4]))
     #
@@ -392,37 +272,7 @@ def Gφψ(
     iw1 = tf.keras.layers.Conv2D(1, (k, k), activation=activation3, padding='same')(Concatenate()([xl1u,iw2]))
     # iw1 = SpatialAttention()(Concatenate()([xl1u, l1, iw2]))
     R = IDWT2D(wave=Ψ)(Concatenate()([iw1,h1]))    
-
-
-
-    # R = tf.keras.layers.Conv2D(4, (3, 3), activation=activation3, padding='same')(Concatenate()([R, s_]))
-    # R = tf.keras.layers.Dropout(0.4)(R)
-    # R = tf.keras.layers.Conv2D(4, (3, 3), activation=activation3, padding='same')(R)
-
-    # n = 4
-    # R = tf.keras.layers.Conv2D(n, (3, 3), activation=activation3, padding='same')(Concatenate()([R, s_skip]))
-    # R = tf.keras.layers.Dropout(0.4)(R)
-    # R = tf.keras.layers.Conv2D(n, (3, 3), activation=activation3, padding='same')(R)
-
-    #!!
-    # R = (Concatenate()([R, s_skip]))
-    # R = conv2D(f//2, R, activation=activation3)
-    #==
-
-    # R = tf.keras.layers.Conv2D(1, (1, 1), activation='sigmoid')(R)    
-
-    # R  = tf.keras.layers.Resizing(
-    #                 height=input_shape[0],
-    #                 width=input_shape[1],
-    #                 interpolation='bilinear',
-    #                     crop_to_aspect_ratio=False
-    #                 )(R) 
-
-    # subtract
-    # R = keras.layers.subtract([s_skip,R])
-    
-    
-    
+   
     
     
     ## OLD
@@ -451,27 +301,6 @@ def Gφψ(
     else: 
         return model
 
-
-    #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy',tfa.losses.GIoULoss()])
-    #model.compile(optimizer='adam', loss=IoU, metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-    # model.compile(optimizer='adam', loss=Dice, metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-    # model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-
-
-    # optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
-    # # iou_metric = tf.keras.metrics.MeanIoU(num_classes=2, name='binaryIoU') 
-    # iou_metric = tf.keras.metrics.BinaryIoU(target_class_ids=[1], name='IoU')
-    # model.compile(optimizer=optimizer, loss=custom_loss, metrics=['accuracy', dice_coef, iou_metric])
-    # model.summary()
-    # plot_model(model, 
-    #           show_shapes=True,
-    #           expand_nested=False,
-    #           show_layer_activations=True)
-    #         #   to_file=f'{wave}_Unet_{round(time.time(),4)}.png')
-    # return model
-
-# generator = 
 
 if __name__=='__main__':
     # Loss = BoundaryAwareDiceLoss(alpha=1, beta=1, gamma=1, epsilon=1e-5) ## BAD loss

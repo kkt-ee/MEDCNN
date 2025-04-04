@@ -3,6 +3,24 @@ import datetime
 
 # from datetime import timedelta
 def elapsedtime(start_time, end_time):
+    """Compute elapsed time
+
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
     # Calculate elapsed time
     elapsed_time_seconds = end_time - start_time
 
@@ -33,6 +51,24 @@ def elapsedtime(start_time, end_time):
 # import time
 # import datetime
 def timestamp(time):
+    """Create a time stamp
+
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
     # Get the current timestamp using time.time()
     timestamp = time
 

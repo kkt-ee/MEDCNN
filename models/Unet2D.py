@@ -1,6 +1,25 @@
-#Build the model
+""" Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+
+
 import tensorflow as tf
 
+# Unet configurations
 uconfigs = {
     '12345':(2,4,8,16,32),
     '23456':(4,8,16,32,64),
@@ -8,12 +27,8 @@ uconfigs = {
     '45678':(16,32,64,128,256),
     '56789':(32,64,128,256,512)
     }    
-    
-    #a,b,c,d,e=2,4,8,16,32
-    # a,b,c,d,e=4,8,16,32,64
-    # a,b,c,d,e=8,16,32,64,128
-    # a,b,c,d,e=16,32,64,128,256
 
+#%%    
 def Unet2D(
     n_classes=2, 
     n_input_channels=1, 
@@ -26,6 +41,25 @@ def Unet2D(
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001),
     residual=False,
     compile=True):
+    """UNet2D (control model) 
+    
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without attentions
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+    """
 
     a, b, c, d, e = config
     
@@ -50,15 +84,6 @@ def Unet2D(
     #     x
     #     ))(s)
     #s = Normlayer(inputs_resiz)
-
-    #resize
-    #inputs_resized = tf.keras.layers.Resizing(
-    #    height=256,
-    #    width=256,
-    #    interpolation='bilinear',
-    #    crop_to_aspect_ratio=False
-    #)(inputs)
-
 
     #s = tf.keras.layers.Lambda(lambda x: x / 255)(inputs)
 
@@ -137,22 +162,6 @@ def Unet2D(
     model = tf.keras.Model(inputs=[inputs], outputs=[outputs])
 
 
-
-
-
-    
-    # model = tf.keras.Model(inputs=[inputs], outputs=[outputs])
-    # model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    #model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-    #model.compile(optimizer='adam', loss=IoU, metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-    # model.compile(optimizer='adam', loss=Dice, metrics=[tf.keras.metrics.MeanIoU(num_classes=2)])
-
-    # if compile==True:
-    #     # optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
-    #     # iou_metric = tf.keras.metrics.MeanIoU(num_classes=2, name='binaryIoU') 
-    #     iou_metric = tf.keras.metrics.BinaryIoU(target_class_ids=[1], name='IoU')
-    #     model.compile(optimizer=optimizer, loss=custom_loss, metrics=['accuracy', dice_coef, iou_metric])
-
     if compile==True:
         # model = tf.keras.Model(inputs=[inputs], outputs=[x])
         # generator_optimizer = tf.keras.optimizers.Adam(learning_rate=2e-4)
@@ -163,18 +172,6 @@ def Unet2D(
         #
     else: 
         return model
-
-
-
-
-
-    # model.summary()
-    # plot_model(model, 
-    #         show_shapes=True,
-    #         expand_nested=False,
-    #         show_layer_activations=True)
-            #    to_file=f'Unet_{a}-{b}-{d}-{d}-{e}-{d}-{c}-{b}-{a}{round(time.time(),4)}.png')
-
 
 
 if __name__=='__main__':

@@ -12,6 +12,24 @@ import tensorflow as tf
 from keras.utils import plot_model 
 
 def compile_model(model, dataset, dice_coef):
+    """Compile model 
+    
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
     if dataset == 'IBSR':
         # Loss, lossname = BoundaryAwareDiceLoss(alpha=1, beta=1, gamma=1, epsilon=1e-5), 'bad' ## BAD loss
         Loss, lossname = 'binary_crossentropy', 'bce'

@@ -22,6 +22,24 @@ import tensorflow as tf
 import time
 
 def train(model, train_iterator, test_iterator, val_iterator, dataset='IBSR', segconfig='nonResidual' , lossname='bce', CONFIGKEY='4567', epochs=40):
+    """Train model
+
+    Multiresolution Encoder-Decoder Convolutional Neural Network (MEDCNN) without  attentions. 
+    Copyright (C) 2025 Kishore Kumar Tarafdar
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    """
     start_time = time.time()
     # MODEL_FNAME_PATTERN = f'{timestamp(start_time)}Ghaar_{datasetname}_{segconfig}_{lossname}_config{configkey}.keras'
     MODEL_FNAME_PATTERN = f'{timestamp(start_time)}G_{dataset}_{segconfig}_{lossname}_config{CONFIGKEY}.keras'
