@@ -53,9 +53,15 @@ pip install .
 
 * * *
 
-## Verify installation
+## Verify installation and
 
-### Sample usage
+```python
+import MEDCNN
+MEDCNN.__version__
+```
+
+
+## Sample usage
 
    - Import MEDCNN 2D Gφψ without attention
    ```python
