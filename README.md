@@ -10,7 +10,7 @@
 [![MIT](https://img.shields.io/badge/license-GPLv3-deepgreen.svg?style=flat)](https://github.com/kkt-ee/TFDWT/LICENSE)
 
 
-  - This MEDCNN version is 2D and without attentions in the decoder
+  - This is a 2D version of MEDCNN and **without attentions** in the decoder
   - Full paper with attentions: https://doi.org/10.1109/ICASSP49660.2025.10890832
 
 
