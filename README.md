@@ -106,8 +106,14 @@ MEDCNN.__version__
    Assuming X and Y is loaded by a dataloader
    ```python
    train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y)
-   epochs = 40
-   train(model, train_iterator, test_iterator, val_iterator, dataset=dataset, segconfig=segconfig , lossname=lossname, CONFIGKEY=CONFIGKEY, epochs=epochs)
+   train(
+    model, 
+    train_iterator, test_iterator, val_iterator, 
+    dataset='IBSR', 
+    segconfig=segconfig, 
+    lossname='bce', 
+    CONFIGKEY=CONFIGKEY, 
+    epochs=40)
    ```
 
 
