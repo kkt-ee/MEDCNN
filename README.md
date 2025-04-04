@@ -63,12 +63,12 @@ pip install .
    ```
 
    - Import the control Unet2D model for reference
-   ```
+   ```python
    from MEDCNN.models.ControlUnet2D import Unet2D, uconfigs
    ```
 
    - Import utils to compile and train model
-   ```
+   ```python
    from MEDCNN.utils.utils import elapsedtime, timestamp
    from MEDCNN.utils.BoundaryAwareDiceLoss import BoundaryAwareDiceLoss
    from MEDCNN.utils.Load2Ddata import load_ibsr_XY
@@ -79,14 +79,14 @@ pip install .
    ```
 
    - Example: Compile a MEDCNN
-   ```
+   ```python
    CONFIGKEY= 'minimal2'
    model, segconfig = Gφψ(config=configs[CONFIGKEY], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
    ```
 
    - Example: Compile a control Unet2D
-   ```
+   ```python
    CONFIGKEY = '45678',
    model, segconfig = Unet2D(config=uconfigs['45678'], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
@@ -94,7 +94,7 @@ pip install .
 
    - Example: Train a model with X an Y of shape (7056, 256, 256, 1), (7056, 256, 256, 1)
    Assuming X and Y is loaded by a dataloader
-   ```
+   ```python
    train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y)
    epochs = 40
    train(model, train_iterator, test_iterator, val_iterator, dataset=dataset, segconfig=segconfig , lossname=lossname, CONFIGKEY=CONFIGKEY, epochs=epochs)
