@@ -93,6 +93,7 @@ MEDCNN.__version__
    CONFIGKEY= 'minimal2'
    model, segconfig = Gφψ(config=configs[CONFIGKEY], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
+   model.summary()
    ```
 
    - Example: Compile a control Unet2D
@@ -100,12 +101,12 @@ MEDCNN.__version__
    CONFIGKEY = '45678',
    model, segconfig = Unet2D(config=uconfigs['45678'], compile=False), 'nonResidual'
    model, lossname = compile_model(model, dataset, dice_coef)
+   model.summary()
    ```
 
    - Example: Train a model with X an Y of shape (7056, 256, 256, 1), (7056, 256, 256, 1)
-   Assuming X and Y is loaded by a dataloader
    ```python
-   train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y)
+   train_iterator, test_iterator, val_iterator = get_train_test_val_iterators(X,Y) #Assuming X and Y is loaded by a dataloader
    train(
     model, 
     train_iterator, test_iterator, val_iterator, 
